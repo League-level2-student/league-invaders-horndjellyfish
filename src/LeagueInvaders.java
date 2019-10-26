@@ -7,6 +7,7 @@ public class LeagueInvaders {
     final int height = 800;
     final int width = 500;
     GamePanel gp = new GamePanel();
+
     public static void main(String[] args) {
         LeagueInvaders LI = new LeagueInvaders();
         LI.setup();
@@ -20,5 +21,6 @@ public class LeagueInvaders {
         frame.addKeyListener(gp);
         frame.getContentPane().setPreferredSize(new Dimension(width, height));
         frame.pack();
+        gp.startGame();
     }
 }
