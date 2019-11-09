@@ -6,8 +6,6 @@ public class GameObject {
     int width;
     int height;
     boolean isAlive = true;
-
-
     GameObject(int x, int y, int width, int height) {
     this.x = x;
     this.y = y;
