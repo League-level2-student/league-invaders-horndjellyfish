@@ -6,16 +6,17 @@ public class GameObject {
     int width;
     int height;
     boolean isAlive = true;
+    Rectangle collisionBox;
     GameObject(int x, int y, int width, int height) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    collisionBox = new Rectangle(x, y, width, height);
     }
 
     public void update() {
-//    x = x + 5;
-//    y = y + 5;
+    collisionBox.setBounds(x, y, width, height);
     }
 
     public void draw(Graphics g) {
