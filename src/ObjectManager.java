@@ -3,27 +3,23 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ObjectManager {
-    Rocketship ros;
-    int score = 0;
+    Rocketship rs;
+    public int score = 0;
 
     public int getScore() {
-        for (int i = 0; i < aliens.size(); i++) {
-            if (aliens.get(i).isAlive = false) {
-                this.score = score + 1;
-            }
-        }
-                
+        this.score = score + 1;
         return this.score;
     }
 
     ObjectManager(Rocketship ros) {
-        this.ros = ros;
+        this.rs = ros;
     }
 
     ArrayList<Projectile> projectiles = new ArrayList<>();
     ArrayList<Alien> aliens = new ArrayList<>();
 
     public void addAlien(Alien alien) {
+
         this.aliens.add(alien);
     }
 
@@ -39,7 +35,7 @@ public class ObjectManager {
         for (int i = 0; i < aliens.size(); i++) {
             aliens.get(i).update();
         }
-        ros.update();
+        rs.update();
     }
 
     public void draw(Graphics g) {
@@ -49,7 +45,7 @@ public class ObjectManager {
         for (int i = 0; i < aliens.size(); i++) {
             aliens.get(i).draw(g);
         }
-        ros.draw(g);
+        rs.draw(g);
 
     }
 
@@ -64,18 +60,21 @@ public class ObjectManager {
         }
     }
 
-    public void purgeEnemies() {
+    public void purgeObjects() {
         for (int i = 0; i < aliens.size(); i++) {
-            if (aliens.get(i).isAlive = false) {
+            if (!aliens.get(i).isAlive) {
                 aliens.remove(i);
+
             }
         }
+
     }
 
     public void checkCollision() {
         for (int i = 0; i < aliens.size(); i++) {
-            if (ros.collisionBox.intersects(aliens.get(i).collisionBox)) {
-                ros.isAlive = false;
+            if (rs.collisionBox.intersects(aliens.get(i).collisionBox)) {
+                rs.isAlive = false;
+
             }
 
         }
@@ -83,6 +82,9 @@ public class ObjectManager {
             for (int j = 0; j < aliens.size(); j++) {
                 if (aliens.get(j).collisionBox.intersects(projectiles.get(i).collisionBox)) {
                     aliens.get(j).isAlive = false;
+                    System.out.println("alien intersected with projectile");
+                    getScore();
+                    System.out.println(score);
                 }
             }
         }

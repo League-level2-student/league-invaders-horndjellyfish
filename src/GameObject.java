@@ -7,6 +7,9 @@ public class GameObject {
     int height;
     boolean isAlive = true;
     Rectangle collisionBox;
+
+
+
     GameObject(int x, int y, int width, int height) {
     this.x = x;
     this.y = y;
@@ -16,7 +19,7 @@ public class GameObject {
     }
 
     public void update() {
-    collisionBox.setBounds(x, y, width, height);
+        collisionBox.setBounds(x, y, width, height);
     }
 
     public void draw(Graphics g) {

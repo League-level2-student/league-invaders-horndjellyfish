@@ -12,27 +12,30 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     Timer timer = new Timer(1000 / 60, this);
     //GameObject go;
     Font titleFont;
+    Font subtitleFont;
     final int MENU_STATE = 0;
     final int GAME_STATE = 1;
     final int END_STATE = 2;
     int currentState = MENU_STATE;
-    Rocketship rs = new Rocketship(225, 700, 50, 50, 20);
+    Rocketship rs = new Rocketship(225, 700, 50, 50, 30);
     ObjectManager om = new ObjectManager(rs);
 
     GamePanel() {
         //go = new GameObject(1, 2, 3, 4);
         titleFont = new Font("Arial", Font.PLAIN, 48);
+        subtitleFont = new Font("Arial", Font.PLAIN, 25);
     }
 
     public void updateMenuState() {
     }
 
     public void updateGameState() {
+        rs.update();
         om.checkCollision();
-        om.purgeEnemies();
+        om.purgeObjects();
         om.manageEnemies();
         om.update();
-        if (rs.isAlive = false) {
+        if (rs.isAlive == false) {
             currentState = END_STATE;
         }
     }
@@ -51,12 +54,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     public void drawGameState(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, 500, 800);
+        rs.draw(g);
         om.draw(g);
     }
 
     public void drawEndState(Graphics g) {
         g.setColor(Color.RED);
         g.fillRect(0, 0, 500, 800);
+        g.setColor(Color.YELLOW);
+        g.setFont(titleFont);
+        g.drawString("GAME OVER", 90, 400);
+       // g.setFont(subtitleFont);
+        //g.drawString("Score: " + , 90, 400);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -98,6 +107,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
                 currentState = END_STATE;
             } else if (currentState == END_STATE) {
                 currentState = MENU_STATE;
+            }
+            if (currentState == END_STATE) {
+                rs = new Rocketship(225, 700, 50, 50, 30);
+                om = new ObjectManager(rs);
             }
         }
         if (e.getKeyCode() == KeyEvent.VK_UP) {
