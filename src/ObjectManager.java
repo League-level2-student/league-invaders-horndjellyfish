@@ -7,7 +7,12 @@ public class ObjectManager {
     public int score = 0;
 
     public int getScore() {
-        this.score = score + 1;
+        for (int i = 0; i < aliens.size(); i++) {
+        	if (!aliens.get(i).isAlive) {
+        		this.score = score + 1;
+                
+        	}
+        }
         return this.score;
     }
 
