@@ -87,9 +87,9 @@ public class ObjectManager {
             for (int j = 0; j < aliens.size(); j++) {
                 if (aliens.get(j).collisionBox.intersects(projectiles.get(i).collisionBox)) {
                     aliens.get(j).isAlive = false;
-                    System.out.println("alien intersected with projectile");
+//                    System.out.println("alien intersected with projectile");
                     getScore();
-                    System.out.println(score);
+//                    System.out.println(score);
                 }
             }
         }
